@@ -1,0 +1,13 @@
+metric,value
+Training Records,1428.0
+Testing Records,357.0
+Test Accuracy,1.0
+Weighted Precision,1.0
+Weighted Recall,1.0
+Weighted F1,1.0
+Anomaly Recall,1.0
+Incorrect Test Predictions,0.0
+Test Error Rate,0.0
+Mean Test Confidence,0.9952380952380953
+Minimum Test Confidence,0.845
+Low Confidence Predictions (<90%),2.0
