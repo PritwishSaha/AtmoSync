@@ -1,0 +1,8 @@
+Metric,Value
+Total Records,1785
+Predicted Normal,1249
+Predicted Warning,352
+Predicted Anomaly,184
+High Confidence,1767
+Medium Confidence,18
+Low Confidence,0
