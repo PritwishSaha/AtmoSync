@@ -1,0 +1,2 @@
+date,total_records,anomaly_records,high_critical_records,avg_environmental_risk,avg_temperature,avg_humidity,avg_vibration,anomaly_rate_pct
+2026-09-10,1785,184,257,2.8974789915966386,11.228212885154061,87.71549579831932,0.19122128851540615,10.308123249299719
