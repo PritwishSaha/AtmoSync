@@ -1,0 +1,50 @@
+{
+  "schema_name": "atmosync_telemetry",
+  "version": "1.0",
+  "description": "Telemetry event schema for AtmoSync shipping containers",
+  "fields": [
+    {
+      "name": "container_id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "timestamp",
+      "type": "datetime",
+      "required": true
+    },
+    {
+      "name": "commodity",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "temperature",
+      "type": "float",
+      "unit": "celsius",
+      "required": true
+    },
+    {
+      "name": "humidity",
+      "type": "float",
+      "unit": "percent",
+      "required": true
+    },
+    {
+      "name": "vibration",
+      "type": "float",
+      "unit": "g",
+      "required": true
+    },
+    {
+      "name": "condition",
+      "type": "string",
+      "allowed_values": [
+        "NORMAL",
+        "WARNING",
+        "ANOMALY"
+      ],
+      "required": true
+    }
+  ]
+}

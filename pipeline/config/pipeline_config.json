@@ -1,0 +1,22 @@
+{
+  "project": "AtmoSync",
+  "version": "1.0",
+  "pipeline": {
+    "source": "IoT Simulator",
+    "streaming": "Apache Kafka",
+    "raw_storage": "Local CSV / Object Storage",
+    "warehouse": "Snowflake",
+    "transformation": "dbt",
+    "analytics": "Python / ML",
+    "dashboard": "Streamlit / Apache Superset"
+  },
+  "stages": [
+    "generate",
+    "ingest",
+    "validate",
+    "store",
+    "transform",
+    "analyze",
+    "visualize"
+  ]
+}

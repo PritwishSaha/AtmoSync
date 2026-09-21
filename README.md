@@ -31,3 +31,24 @@ Apache Superset
 SQL
 
 The specified architecture uses Kafka for streaming ingestion, Snowflake for storage, dbt for transformation, and Superset for visualization.
+
+## Pipeline Architecture
+
+AtmoSync follows a layered data pipeline architecture:
+
+```text
+IoT Simulator
+      ↓
+Apache Kafka
+      ↓
+Raw Data Storage
+      ↓
+Snowflake
+      ↓
+dbt
+      ↓
+Analytics + ML
+      ↓
+Dashboard
+      ↓
+Spoilage Arbitrage Decision Support

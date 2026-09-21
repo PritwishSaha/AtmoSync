@@ -1,0 +1,27 @@
+flowchart TD
+
+    A[IoT Sensors / Simulator]
+    B[Kafka Producer]
+    C[Apache Kafka<br/>atmosync.telemetry]
+    D[Kafka Consumer]
+    E[Raw Storage]
+    F[Snowflake<br/>Data Warehouse]
+    G[dbt<br/>Transformations]
+    H[Analytics Layer]
+    I[ML Prediction]
+    J[Risk Analytics]
+    K[Dashboard<br/>Streamlit / Superset]
+    L[Spoilage Arbitrage<br/>Decision Support]
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
+    F --> G
+    G --> H
+    H --> I
+    H --> J
+    I --> K
+    J --> K
+    K --> L

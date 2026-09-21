@@ -1,0 +1,13 @@
+{
+  "bootstrap_servers": "localhost:9092",
+  "topic": "atmosync.telemetry",
+  "consumer_group": "atmosync-analytics",
+  "producer": {
+    "acks": "all",
+    "retries": 3
+  },
+  "consumer": {
+    "auto_offset_reset": "earliest",
+    "enable_auto_commit": true
+  }
+}
