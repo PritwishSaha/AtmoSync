@@ -126,3 +126,5 @@ The processed dataset will be used for the next stage of AtmoSync analytics, spo
 ## Conclusion
 
 Day 5 successfully transformed validated IoT telemetry into an analysis-ready feature dataset. The newly created temporal, sensor-risk, environmental-risk, spoilage-risk, container-level, and commodity-level features provide the foundation for container monitoring, spoilage analysis, and future arbitrage decision logic.
+
+Thankyou
