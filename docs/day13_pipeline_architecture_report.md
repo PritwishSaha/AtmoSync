@@ -238,3 +238,5 @@ The spoilage-risk, arbitrage, and operational-priority rules are project-specifi
 * Day 13 architecture report
 * Pipeline sample dataset
 * README architecture section
+
+## Thank You
