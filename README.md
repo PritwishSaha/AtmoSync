@@ -1,6 +1,4 @@
-Project title
-
-AtmoSync — Micro-Climate Arbitrage Analytics
+## AtmoSync — Micro-Climate Arbitrage Analytics
 
 Problem
 
