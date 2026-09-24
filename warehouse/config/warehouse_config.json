@@ -1,0 +1,20 @@
+{
+  "project": "AtmoSync",
+  "warehouse_platform": "Snowflake",
+  "database": "ATMOSYNC_DB",
+  "schema": "TELEMETRY_SCHEMA",
+  "raw_table": "RAW_TELEMETRY",
+  "source_file": "data/validated/validated_telemetry.csv",
+  "warehouse_ready_file": "data/processed/warehouse_ready_telemetry.csv",
+  "table_columns": [
+    "container_id",
+    "timestamp",
+    "commodity",
+    "temperature",
+    "humidity",
+    "vibration",
+    "condition"
+  ],
+  "status": "configuration_only",
+  "next_stage": "Snowflake connection and data loading"
+}
