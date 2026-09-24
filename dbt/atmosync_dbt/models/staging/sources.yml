@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: telemetry
+    database: ATMOSYNC_DB
+    schema: TELEMETRY_SCHEMA
+
+    tables:
+      - name: raw_telemetry

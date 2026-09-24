@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: stg_telemetry
+
+    columns:
+      - name: container_id
+        tests:
+          - not_null
+
+      - name: timestamp
+        tests:
+          - not_null
+
+      - name: commodity
+        tests:
+          - not_null
+
+      - name: temperature
+        tests:
+          - not_null
+
+      - name: humidity
+        tests:
+          - not_null
+
+      - name: vibration
+        tests:
+          - not_null
+
+      - name: condition
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - NORMAL
+                  - WARNING
+                  - ANOMALY
