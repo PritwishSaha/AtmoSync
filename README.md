@@ -28,7 +28,7 @@ dbt
 Apache Superset
 SQL
 
-The specified architecture uses Kafka for streaming ingestion, Snowflake for storage, dbt for transformation, and Superset for visualization.
+The Specified architecture uses Kafka for streaming ingestion, Snowflake for storage, dbt for transformation, and Superset for visualization. 
 
 ## Pipeline Architecture
 
