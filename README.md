@@ -1,5 +1,5 @@
 ## AtmoSync — Micro-Climate Arbitrage Analytics
-##  internship project
+##  Internship project
 Problem
 
 Traditional supply-chain analytics rely on standard transit times and macro-weather forecasts and may fail to capture hyper-local environmental changes inside individual shipping containers. The project aims to monitor container conditions and identify potential spoilage and rerouting opportunities.
