@@ -1,5 +1,18 @@
+# Python
+.venv/
 __pycache__/
 *.pyc
-.venv/
+
+# Environment / secrets
 .env
+.env.*
+!.env.example
+
+# dbt
+dbt/atmosync_dbt/target/
+dbt/atmosync_dbt/logs/
+
+# Snowflake credentials
+profiles.yml
+# Jupyter checkpoints
 .ipynb_checkpoints/
