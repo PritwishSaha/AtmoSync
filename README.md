@@ -1,4 +1,5 @@
-🌡️ AtmoSync — Micro-Climate Arbitrage Analytics
+## AtmoSync — Micro-Climate Arbitrage Analytics
+## ---------------------------------------------
 
 «Turning container-level environmental telemetry into actionable spoilage-risk and rerouting insights.»
 
