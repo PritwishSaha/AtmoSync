@@ -1,259 +1,289 @@
-## AtmoSync — Micro-Climate Arbitrage Analytics
-## ---------------------------------------------
+<div align="center">
 
-«Turning container-level environmental telemetry into actionable spoilage-risk and rerouting insights.»
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f2027,50:203a43,100:2c5364&height=220&section=header&text=AtmoSync&fontSize=70&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Micro-Climate%20Arbitrage%20Analytics&descSize=22&descAlignY=60" alt="AtmoSync banner" width="100%"/>
 
-AtmoSync is a micro-climate analytics and decision-support system designed for temperature-sensitive supply chains.
+### 🌍 Monitor &nbsp;•&nbsp; 🔮 Predict &nbsp;•&nbsp; 📊 Analyze &nbsp;•&nbsp; 🎯 Decide
 
-Traditional supply-chain analytics often depend on standard transit times, historical conditions, and macro-level weather information. However, the actual environment experienced by a commodity can vary significantly inside an individual shipping container.
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&pause=1200&color=00C2FF&center=true&vCenter=true&width=700&lines=Container-level+micro-climate+monitoring;Spoilage+risk+%2B+anomaly+detection;From+raw+telemetry+to+business+decisions" alt="Typing animation"/></a>
 
-AtmoSync addresses this gap by monitoring container-level telemetry such as temperature, humidity, and vibration, combining those signals with commodity information and analytical/ML outputs to identify potential spoilage risks and support spoilage arbitrage decisions.
+<br/>
 
----
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Apache Kafka](https://img.shields.io/badge/Apache%20Kafka-231F20?style=for-the-badge&logo=apachekafka&logoColor=white)
+![Snowflake](https://img.shields.io/badge/Snowflake-29B5E8?style=for-the-badge&logo=snowflake&logoColor=white)
+![dbt](https://img.shields.io/badge/dbt-FF694B?style=for-the-badge&logo=dbt&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
 
-📌 Project Overview
+![Status](https://img.shields.io/badge/Status-Final%20Review%20Ready-brightgreen?style=flat-square)
+![dbt Build](https://img.shields.io/badge/dbt%20build-11%2F11%20passed-success?style=flat-square)
+![Records](https://img.shields.io/badge/Telemetry%20records-1%2C785-blue?style=flat-square)
+![Data](https://img.shields.io/badge/Data-Simulated%20IoT-orange?style=flat-square)
 
-The core idea behind AtmoSync is:
+<br/>
 
-IoT Container Telemetry
-          +
-Commodity Information
-          ↓
-Micro-Climate Analysis
-          ↓
-Condition / Spoilage Risk
-          ↓
-Arbitrage Analysis
-          ↓
-Operational Decision
-
-Instead of asking only:
-
-«"How long will the shipment take?"»
-
-AtmoSync aims to answer:
-
-«"What is happening to the commodity inside this specific container, and should the shipment continue, receive increased monitoring, be rerouted, or require intervention?"»
+[📌 Overview](#-project-overview)  | 
+[🏗️ Architecture](#️-system-architecture)  | 
+[📊 Dataset](#-dataset)  | 
+[📈 Dashboard](#-dashboard)  | 
+[▶️ Run It](#️-running-the-project)  | 
+[🔬 Verification](#-verification-results)
 
 ---
 
-🎯 Problem Statement
+## 📌 Project Overview
 
-Temperature-sensitive commodities such as fruits and vegetables can deteriorate when exposed to unfavorable environmental conditions.
-
-A conventional supply-chain system may use:
-
-- Expected transit duration
-- Historical temperature
-- Regional weather
-- Fixed storage assumptions
-- Average spoilage rates
-
-These approaches may not capture container-specific micro-climate conditions.
-
-For example:
-
-Container A
-Temperature: Normal
-Humidity: Acceptable
-Vibration: Low
-        ↓
-Continue Monitoring
-
-
-Container B
-Temperature: High
-Humidity: High
-Vibration: Elevated
-        ↓
-Potential Spoilage Risk
-        ↓
-Consider Rerouting
-
-The objective of AtmoSync is therefore to create a data pipeline capable of monitoring these conditions at the individual container level.
+AtmoSync is a micro-climate analytics system for simulated IoT container telemetry. It combines environmental monitoring, ML predictions, spoilage-risk analysis, and spoilage-arbitrage decisions to support container-level business decisions.
 
 ---
 
-💡 What is Micro-Climate Arbitrage?
+## 🏗️ System Architecture
 
-Micro-Climate
+![AtmoSync System Architecture](docs/images/atmosync-architecture.png)
 
-A micro-climate is the localized environmental condition experienced within a specific area.
+The verified pipeline follows:
 
-In AtmoSync, the micro-climate refers to environmental conditions inside a shipping container.
-
-Important telemetry signals include:
-
-- 🌡️ Temperature
-- 💧 Humidity
-- 📳 Vibration
-- 📦 Container ID
-- 🥭 Commodity
-- 🕒 Timestamp
-- ⚠️ Condition
+**IoT Simulator → Validation → Kafka → Kafka Consumer → Snowflake → dbt → Analytics & ML Monitoring → Streamlit Dashboard → Business Decision**
 
 ---
 
-Arbitrage
+## 📊 Dataset
 
-In this project, arbitrage refers to identifying an operational opportunity where changing the shipment decision may reduce potential spoilage-related loss.
+The project uses simulated IoT telemetry containing:
 
-For example:
+| Metric            |                      Value |
+| ----------------- | -------------------------: |
+| Telemetry Records |                      1,785 |
+| Containers        |                          5 |
+| Commodities       |                          4 |
+| Telemetry Fields  |                          7 |
+| Conditions        | Normal / Warning / Anomaly |
 
-Shipment
-   ↓
-Container condition deteriorates
-   ↓
-Higher spoilage risk
-   ↓
-Potential economic loss
-   ↓
-Evaluate alternative action
-   ↓
-Continue / Monitor / Reroute / Intervene
-
-The system does not simply detect an anomaly.
-
-It attempts to connect:
-
-Environmental Condition
-          +
-Commodity
-          +
-Risk
-          ↓
-Operational Decision
+The telemetry contains container ID, timestamp, commodity, temperature, humidity, vibration, and condition.
 
 ---
 
-🎯 Main Objective
+## 📈 Dashboard
 
-The primary objective of AtmoSync is to build an analytics pipeline that combines:
+![AtmoSync Monitoring Dashboard](docs/images/atmosync-dashboard.png)
 
-1. IoT Container Telemetry
+The dashboard provides:
 
-Environmental measurements collected from simulated shipping containers.
+* Environmental risk monitoring
+* Sensor analytics
+* ML prediction monitoring
+* Container-level analysis
+* Commodity-level analysis
+* Spoilage-risk analysis
+* Spoilage-arbitrage decisions
+* High-risk telemetry monitoring
 
-2. Commodity Information
+### Spoilage Arbitrage Analysis
 
-Information about the commodity being transported.
+![Spoilage Arbitrage Analysis](docs/images/spoilage-arbitrage-analysis.png)
 
-3. Condition Analysis
+The system supports four business actions:
 
-Classification of container conditions into operational states.
-
-4. ML Prediction Monitoring
-
-Monitoring predicted conditions and prediction confidence.
-
-5. Spoilage-Risk Analysis
-
-Identifying conditions that may indicate increased spoilage risk.
-
-6. Arbitrage Decision Support
-
-Converting analytical results into operational actions such as:
-
-- Continue monitoring
-- Increase monitoring
-- Consider rerouting
-- Urgent intervention
+| Decision            | Records |
+| ------------------- | ------: |
+| CONTINUE MONITORING |     890 |
+| INCREASE MONITORING |     638 |
+| CONSIDER REROUTING  |     222 |
+| URGENT INTERVENTION |      35 |
 
 ---
 
-🏗️ System Architecture
+## ▶️ Running the Project
 
-The high-level AtmoSync architecture is:
+The dashboard can be run locally using Docker.
 
-                    ┌───────────────────┐
-                    │   IoT Simulator   │
-                    └─────────┬─────────┘
-                              │
-                              ▼
-                    ┌───────────────────┐
-                    │   Apache Kafka    │
-                    │ Streaming Layer   │
-                    └─────────┬─────────┘
-                              │
-                              ▼
-                    ┌───────────────────┐
-                    │   Raw Telemetry  │
-                    │      Data        │
-                    └─────────┬─────────┘
-                              │
-                              ▼
-                    ┌───────────────────┐
-                    │     Snowflake    │
-                    │ Data Warehouse    │
-                    └─────────┬─────────┘
-                              │
-                              ▼
-                    ┌───────────────────┐
-                    │       dbt        │
-                    │ Transformation    │
-                    └─────────┬─────────┘
-                              │
-                              ▼
-                ┌──────────────────────────┐
-                │     Analytics + ML       │
-                │ Prediction & Monitoring  │
-                └────────────┬─────────────┘
-                             │
-                             ▼
-                    ┌───────────────────┐
-                    │ Apache Superset   │
-                    │    Dashboard      │
-                    └─────────┬─────────┘
-                              │
-                              ▼
-                ┌──────────────────────────┐
-                │ Spoilage Arbitrage       │
-                │ Decision Support         │
-                └──────────────────────────┘
+```bash
+docker build -t atmosync-dashboard .
+docker run --rm -p 8501:8501 atmosync-dashboard
+```
+
+Then open:
+
+```text
+http://localhost:8501
+```
 
 ---
 
-🔄 Data Flow
+## 🔬 Verification Results
 
-AtmoSync follows a layered data engineering architecture.
+### dbt Verification
 
-Layer 1 — Data Generation
+![dbt Build Success](docs/images/dbt-build-success.png)
 
-An IoT-style simulator generates container telemetry.
+The dbt pipeline was successfully validated with:
 
-Example:
+```text
+PASS=11
+WARN=0
+ERROR=0
+SKIP=0
+NO-OP=0
+REUSED=0
+TOTAL=11
+```
 
-container_id = CONT_001
-timestamp    = 2026-09-10 10:30:00
-commodity    = Avocado
-temperature  = 14.2
-humidity     = 88.4
-vibration   = 0.18
+### Kafka → Snowflake Verification
+
+![Kafka Snowflake Verification](docs/images/kafka-snowflake-verification.png)
+
+The Kafka consumer verification processed the complete telemetry dataset:
+
+```text
+Messages processed: 1785
+Records inserted:   0
+Records skipped:    1785
+Records failed:     0
+```
+
+The records were skipped because they were already present in Snowflake, verifying the duplicate-handling logic.
+
+</div>
 
 ---
 
-Layer 2 — Streaming
+## 📌 Project Overview
 
-Apache Kafka acts as the streaming ingestion layer.
+Traditional supply-chain analytics lean on standard transit times and macro-level weather data. But conditions **inside an individual shipping container** can differ dramatically from the outside world.
 
-IoT Simulator
-      ↓
-Kafka Producer
-      ↓
-Kafka Topic
-      ↓
-Kafka Consumer
+**AtmoSync focuses on that container-level micro-climate.**
 
-This allows telemetry to be handled as a stream instead of treating every record as an isolated file.
+It combines simulated IoT telemetry, Apache Kafka, Snowflake, dbt, machine-learning monitoring, and a Streamlit dashboard to turn raw container telemetry into **actionable business insights**: spotting spoilage risk, flagging anomalies, and recommending interventions.
+
+### 👀 What the system monitors
+
+| | Signal | | Signal |
+|:-:|---|:-:|---|
+| 🌡️ | **Temperature** | 🚢 | **Container** |
+| 💧 | **Humidity** | ⚠️ | **Environmental condition** |
+| 📳 | **Vibration** | 🤖 | **ML-predicted condition** |
+| 📦 | **Commodity** | | |
+
+### 🧭 Decisions it supports
+
+| | Action | Meaning |
+|:-:|---|---|
+| 🟢 | **CONTINUE MONITORING** | Risk is manageable |
+| 🟡 | **INCREASE MONITORING** | Risk requires closer observation |
+| 🟠 | **CONSIDER REROUTING** | Risk may justify changing the route |
+| 🔴 | **URGENT INTERVENTION** | Immediate action may be required |
 
 ---
 
-Layer 3 — Raw Data
+## 🎯 Objectives
 
-Telemetry data is captured before analytical transformations.
+1. 📡 Simulate IoT-based container telemetry
+2. ✅ Validate telemetry before analytical processing
+3. 🚀 Ingest telemetry through Apache Kafka
+4. ❄️ Store raw telemetry in Snowflake
+5. 🔧 Transform and validate data using dbt
+6. ⚠️ Analyze environmental and spoilage risk
+7. 🤖 Monitor ML-based condition predictions
+8. 💰 Identify spoilage-arbitrage opportunities
+9. 📈 Present insights through an interactive dashboard
+10. 🧭 Provide business-oriented decision support
 
-The raw dataset contains:
+---
 
+## 🏗️ System Architecture
+
+```mermaid
+flowchart TD
+    A["📡 <b>IoT Simulator</b><br/>Simulated Telemetry"] --> B["✅ <b>Data Validation</b><br/>Quality Checks"]
+    B --> C["🚀 <b>Apache Kafka / KRaft</b><br/>Topic: telemetry"]
+    C --> D["📥 <b>Kafka Consumer</b><br/>Event Ingestion"]
+    D --> E["❄️ <b>Snowflake</b><br/>ATMOSYNC_DB → TELEMETRY_SCHEMA → RAW_TELEMETRY"]
+    E --> F["🔧 <b>dbt</b><br/>Transformation + Data Quality Tests"]
+    F --> G["🧠 <b>Analytics + ML Monitoring</b><br/>Environmental Risk • Spoilage Risk • Condition Prediction • Arbitrage"]
+    G --> H["📈 <b>Streamlit Dashboard</b><br/>Monitoring + Analytics + Business Decisions"]
+    H --> I["🧭 <b>Business Decision Support</b><br/>Monitor / Increase / Reroute / Intervene"]
+
+    style A fill:#0f2027,stroke:#00c2ff,color:#fff
+    style B fill:#0f2027,stroke:#00c2ff,color:#fff
+    style C fill:#231f20,stroke:#ffffff,color:#fff
+    style D fill:#231f20,stroke:#ffffff,color:#fff
+    style E fill:#0b4f6c,stroke:#29b5e8,color:#fff
+    style F fill:#7a2e1f,stroke:#ff694b,color:#fff
+    style G fill:#3b1f6e,stroke:#b388ff,color:#fff
+    style H fill:#7a1f2b,stroke:#ff4b4b,color:#fff
+    style I fill:#1b5e20,stroke:#69f0ae,color:#fff
+```
+
+### 🔄 End-to-End Data Flow
+
+```text
+📡 Simulated IoT Telemetry
+        ⬇
+✅ Telemetry Validation
+        ⬇
+🚀 Kafka Producer  ➜  Topic: telemetry
+        ⬇
+📥 Kafka Consumer
+        ⬇
+❄️ Snowflake RAW_TELEMETRY
+        ⬇
+🔧 dbt Transformation
+        ⬇
+🧠 Analytics + ML Monitoring
+        ⬇
+📈 Streamlit Dashboard
+        ⬇
+💰 Spoilage-Arbitrage Decisions
+```
+
+---
+
+## 📊 Dataset
+
+### 🔢 At a glance
+
+| 📄 Telemetry records | 🚢 Containers | 📦 Commodities | 🧪 Telemetry features |
+|:-:|:-:|:-:|:-:|
+| **1,785** | **5** | **4** | **7** |
+
+### 🚦 Condition distribution
+
+```text
+🟢 Normal   1,249  ██████████████████████████████████░░░░░░░░░░░░░░░  70.0%
+🟡 Warning    352  ██████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  19.7%
+🔴 Anomaly    184  █████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  10.3%
+```
+
+<table>
+<tr>
+<td valign="top">
+
+**🚢 Containers**
+```text
+CONT_001
+CONT_002
+CONT_003
+CONT_004
+CONT_005
+```
+
+</td>
+<td valign="top">
+
+**📦 Commodities**
+```text
+🥑 Avocado
+🍌 Banana
+🥭 Mango
+🍅 Tomato
+```
+
+</td>
+<td valign="top">
+
+**🧾 Telemetry schema**
+```text
 container_id
 timestamp
 commodity
@@ -261,871 +291,403 @@ temperature
 humidity
 vibration
 condition
+```
+
+</td>
+</tr>
+</table>
 
 ---
 
-Layer 4 — Snowflake
+## ⚙️ Technology Stack
 
-Snowflake provides the analytical data warehouse.
-
-The project uses:
-
-Database:
-ATMOSYNC_DB
-
-Schema:
-TELEMETRY_SCHEMA
-
-Raw Table:
-RAW_TELEMETRY
-
-The raw telemetry is loaded into Snowflake before downstream transformation.
+| Layer | Tools |
+|---|---|
+| 🛠️ **Data Engineering** | Python • Apache Kafka (KRaft) • Snowflake • SQL • dbt |
+| 🧠 **Analytics & ML** | Pandas • NumPy • Scikit-learn • Environmental Risk Analysis • Spoilage Risk Analysis • Condition Prediction • Arbitrage Decision Engine |
+| 🎨 **Visualization** | Streamlit • Matplotlib • Seaborn |
+| 🚢 **Deployment & Dev** | Docker • Git • GitHub • PowerShell |
 
 ---
 
-🧹 Data Validation
+## 🚀 Key Components
 
-Before analytical processing, the telemetry dataset is validated.
+### 1️⃣ 📡 IoT Telemetry Simulator
 
-Validation includes checks for:
+Generates synthetic container telemetry that represents environmental conditions during transportation.
 
-- Missing values
-- Duplicate records
-- Invalid sensor values
-- Data types
-- Condition values
-- Temperature ranges
-- Humidity values
-- Vibration measurements
+```text
+Container:    CONT_001
+Commodity:    Mango
+Temperature:  12.4°C
+Humidity:     88%
+Vibration:    0.21
+Condition:    WARNING
+```
 
-The validated dataset contains 1,785 records.
+> [!NOTE]
+> The data is simulated for analytical and engineering purposes and does not represent real IoT hardware.
 
-Dataset Summary
+### 2️⃣ ✅ Data Validation
 
-Metric| Value
-Total records| 1,785
-Columns| 7
-Containers| 5
-Commodities| 4
-Missing values| 0
-Duplicate records| 0
-Invalid sensor records| 0
+Before ingestion, telemetry is checked for:
 
----
+- 🕳️ Missing values
+- 👯 Duplicate records
+- 🚫 Invalid sensor values
+- 🔤 Incorrect data types
+- 🏷️ Valid condition values
+- 🔗 Data consistency
 
-📊 Dataset Structure
+The validated dataset contains **1,785 records**.
 
-The main telemetry dataset contains seven columns.
+### 3️⃣ 🚀 Apache Kafka
 
-Column| Description
-"container_id"| Unique shipping container identifier
-"timestamp"| Time at which telemetry was recorded
-"commodity"| Commodity being transported
-"temperature"| Container temperature
-"humidity"| Container humidity
-"vibration"| Measured vibration level
-"condition"| Operational condition classification
+Kafka provides the event-based ingestion layer.
 
-Example:
+| Setting | Value |
+|---|---|
+| **Kafka mode** | KRaft |
+| **Broker** | `localhost:9092` |
+| **Topic** | `telemetry` |
 
-container_id| timestamp| commodity| temperature| humidity| vibration| condition
-CONT_001| 2026-09-10 10:00| Avocado| 11.2| 86.4| 0.18| NORMAL
-CONT_002| 2026-09-10 10:05| Mango| 16.7| 91.2| 0.24| WARNING
-CONT_003| 2026-09-10 10:10| Banana| 19.4| 94.1| 0.31| ANOMALY
+The producer publishes validated telemetry to the `telemetry` topic. The consumer reads the messages and loads them into Snowflake.
 
----
+**✅ Verified result**
 
-📈 Dataset Statistics
+```text
+Messages processed: 1,785
+Records inserted:   0
+Records skipped:    1,785
+Records failed:     0
+```
 
-The dataset contains four commodities:
+> [!TIP]
+> The records were skipped during final verification because the same telemetry was already present in Snowflake. This confirmed that the consumer's **duplicate-handling logic works correctly**.
 
-Commodity| Records
-Mango| 470
-Tomato| 459
-Avocado| 442
-Banana| 414
+### 4️⃣ ❄️ Snowflake Data Warehouse
 
-Condition distribution:
+| | |
+|---|---|
+| **Database** | `ATMOSYNC_DB` |
+| **Schema** | `TELEMETRY_SCHEMA` |
+| **Raw table** | `RAW_TELEMETRY` |
+| **Verified records** | **1,785** |
 
-Condition| Records
-NORMAL| 1,249
-WARNING| 352
-ANOMALY| 184
+### 5️⃣ 🔧 dbt Transformation
 
----
+dbt handles SQL-based transformation, modeling, and data-quality testing.
 
-🌡️ Sensor Statistics
+**Verified models**
 
-Temperature
+```text
+ANALYTICS.stg_telemetry
+ANALYTICS.arbitrage_analysis
+ANALYTICS.telemetry_summary
+```
 
-Mean: 11.228
-Minimum: -1.98
-Maximum: 20.93
+| 🧱 Models | 🧪 Data tests | 📥 Sources |
+|:-:|:-:|:-:|
+| **3** | **8** | **1** |
 
-Humidity
+**Final build result**
 
-Mean: 87.715
+```text
+PASS=11   WARN=0   ERROR=0   SKIP=0   NO-OP=0   REUSED=0   TOTAL=11
+```
 
-Vibration
+✅ The complete dbt build passed **all 11 configured nodes**.
 
-Mean: 0.191
+### 6️⃣ 🤖 ML Prediction Monitoring
 
-These variables form the primary environmental signals used for monitoring container conditions.
+A condition-prediction workflow monitors the environmental condition of each telemetry record. The monitoring layer tracks:
 
----
+- 🎯 Actual condition
+- 🔮 Predicted condition
+- 📶 Prediction confidence
+- 🏷️ Confidence category
+- ✔️ Prediction status
+- 🔔 Monitoring level
 
-🧠 Condition Classification
+These results feed directly into the overall risk and decision-support workflow.
 
-AtmoSync uses operational condition categories:
+### 7️⃣ ⚠️ Spoilage Risk Analysis
 
-NORMAL
-   ↓
-WARNING
-   ↓
-ANOMALY
+Environmental telemetry is used to calculate a project-specific **spoilage risk / spoilage score**, which represents the potential risk that current conditions could negatively affect the transported commodity.
 
-These categories provide a simplified operational interpretation of sensor conditions.
+The analysis considers:
 
-The system can therefore move from raw numerical measurements:
+| 🌡️ Temperature | 💧 Humidity | 📳 Vibration | 📦 Commodity-specific conditions | 🚨 Detected anomalies |
+|:-:|:-:|:-:|:-:|:-:|
 
-Temperature = 18.4
-Humidity    = 93.1
-Vibration   = 0.29
+Higher environmental risk leads to stronger monitoring or intervention recommendations.
 
-to an operational state:
+### 8️⃣ 💰 Spoilage Arbitrage
 
-ANOMALY
+**Micro-climate arbitrage** means identifying a business opportunity created by a change in the environmental condition of an *individual* shipping container.
 
-This makes the telemetry easier to interpret for downstream analytics and decision support.
+```mermaid
+flowchart LR
+    A["🌡️ Container environmental<br/>risk increases"] --> B["⚠️ Potential spoilage<br/>risk increases"]
+    B --> C["💸 Business impact<br/>becomes significant"]
+    C --> D["🔀 Rerouting / intervention<br/>may reduce expected loss"]
 
----
+    style A fill:#1b3a4b,stroke:#00c2ff,color:#fff
+    style B fill:#5c4a00,stroke:#ffd54f,color:#fff
+    style C fill:#6a2e00,stroke:#ff9800,color:#fff
+    style D fill:#1b5e20,stroke:#69f0ae,color:#fff
+```
 
-🤖 ML Prediction Monitoring
-
-The project also includes an ML prediction monitoring layer.
-
-The monitoring dataset contains:
-
-- Actual condition
-- Predicted condition
-- Prediction confidence
-- Confidence category
-- Prediction status
-- Monitoring level
-- Sensor measurements
-- Container information
-- Commodity information
-
-The purpose is not only to generate a prediction but also to monitor how reliable that prediction is.
-
-Conceptually:
-
-Sensor Data
-     ↓
-ML Model
-     ↓
-Prediction
-     +
-Confidence
-     ↓
-Monitoring Layer
+The system converts analytical risk into business-oriented actions (see [Decisions it supports](#-decisions-it-supports)).
 
 ---
 
-📊 Prediction Monitoring
+## 📈 Dashboard
 
-Prediction confidence is categorized to make ML output easier to interpret.
+The Streamlit dashboard is the centralized monitoring and analytics interface.
 
-The monitoring layer combines:
+<!--
+📸 TIP: add a screenshot of your dashboard here for maximum impact:
+![AtmoSync Dashboard](docs/dashboard.png)
+-->
 
-Predicted Condition
-        +
-Prediction Confidence
-        +
-Sensor Measurements
-        +
-Container
-        +
-Commodity
+### 🏆 Main KPIs
 
-This creates an operational monitoring view rather than exposing raw model output alone.
+| 📄 Telemetry Records | 🚨 Predicted Anomalies | 🔥 High/Critical Risk | 💰 Arbitrage Opportunities | 🌡️ Avg Environmental Risk | 🤖 Avg ML Confidence |
+|:-:|:-:|:-:|:-:|:-:|:-:|
+| **1,785** | **184** | **257** | **107** | **2.90** | **0.995** |
 
----
+### 🧩 Dashboard sections
 
-🚚 Spoilage Arbitrage Decision Layer
-
-The monitoring system translates analytical signals into potential operational actions.
-
-Current action categories include:
-
-Action| Records
-CONTINUE MONITORING| 890
-INCREASE MONITORING| 638
-CONSIDER REROUTING| 222
-URGENT INTERVENTION| 35
-
-Conceptually:
-
-                  Telemetry
-                     ↓
-              Condition Analysis
-                     ↓
-               ML Monitoring
-                     ↓
-               Risk Evaluation
-                     ↓
-        ┌────────────┼─────────────┐
-        ↓            ↓             ↓
-    Continue      Monitor       Reroute
-   Monitoring     Closely       /Intervene
-
-These categories are intended as decision-support outputs, not automatic commands to physically reroute a shipment.
+| | | |
+|---|---|---|
+| 🚦 Condition Monitoring | 📡 Sensor Analytics | ⚠️ Spoilage Risk Analytics |
+| 🤖 ML Prediction Monitoring | 🚢 Container-Level Analysis | 📦 Commodity-Level Analysis |
+| 💰 Spoilage Arbitrage Decisions | 🔥 High-Risk Telemetry | |
 
 ---
 
-❄️ Why Container-Level Monitoring Matters
+## 🐳 Docker Deployment
 
-Consider two containers transporting the same commodity.
+The Streamlit dashboard is containerized and has been **successfully tested locally**.
 
-Container A
+| | |
+|---|---|
+| **Image** | `atmosync-dashboard:latest` |
+| **Container** | `atmosync-dashboard` |
+| **Port** | `8501` |
 
-Temperature → Stable
-Humidity    → Stable
-Vibration   → Low
-Condition   → NORMAL
+```bash
+docker run -p 8501:8501 atmosync-dashboard
+```
 
-Possible operational interpretation:
-
-Continue Monitoring
-
-Container B
-
-Temperature → Increasing
-Humidity    → High
-Vibration   → Elevated
-Condition   → ANOMALY
-
-Possible interpretation:
-
-Increase Monitoring
-          ↓
-Evaluate Spoilage Risk
-          ↓
-Consider Rerouting
-
-The important insight is that the two shipments may have the same planned route and transit duration while experiencing different internal conditions.
+Then open 👉 **http://localhost:8501**
 
 ---
 
-🏢 Snowflake Data Warehouse
+## 📁 Project Structure
 
-AtmoSync uses Snowflake as the central analytical warehouse.
+<details>
+<summary><b>Click to expand 📂</b></summary>
 
-Current configuration:
-
-Database
-└── ATMOSYNC_DB
-    └── TELEMETRY_SCHEMA
-        └── RAW_TELEMETRY
-
-The warehouse provides centralized storage for downstream transformation and analytics.
-
----
-
-🔧 dbt Transformation Layer
-
-dbt is used to transform and test warehouse data.
-
-The dbt project currently includes:
-
-Source
-  ↓
-stg_telemetry
-  ↓
-Analytics Models
-
-The staging layer standardizes the raw telemetry before analytical use.
-
-Example architecture:
-
-Snowflake RAW_TELEMETRY
-          ↓
-       dbt Source
-          ↓
-   stg_telemetry
-          ↓
-   Analytics Models
-          ↓
- Dashboard / Analysis
-
-The dbt workflow includes:
-
-- Sources
-- Models
-- SQL transformations
-- Data tests
-- Build execution
-
----
-
-🧪 Data Quality Testing
-
-Data quality is an important part of the pipeline.
-
-The dbt project includes tests covering the warehouse data model.
-
-The pipeline verifies that transformed data satisfies expected structural and quality conditions before being used downstream.
-
-Conceptually:
-
-Raw Data
-   ↓
-Transformation
-   ↓
-Tests
-   ↓
-Pass
-   ↓
-Analytics
-
-If a test fails:
-
-Raw Data
-   ↓
-Transformation
-   ↓
-Test Failure
-   ↓
-Investigate Data
-
----
-
-📊 Apache Superset
-
-Apache Superset is used as the visualization and dashboard layer.
-
-The dashboard is intended to expose operational insights from the AtmoSync data pipeline.
-
-Potential dashboard sections include:
-
-1. Container Overview
-
-Total Containers
-Active Containers
-Normal Containers
-Warning Containers
-Anomalous Containers
-
-2. Environmental Monitoring
-
-Charts for:
-
-- Temperature
-- Humidity
-- Vibration
-
-3. Condition Distribution
-
-NORMAL
-WARNING
-ANOMALY
-
-4. Commodity Analysis
-
-Compare environmental conditions across:
-
-- Avocado
-- Banana
-- Mango
-- Tomato
-
-5. Arbitrage Monitoring
-
-Display:
-
-Continue Monitoring
-Increase Monitoring
-Consider Rerouting
-Urgent Intervention
-
----
-
-🛠️ Technology Stack
-
-Technology| Purpose
-Python| Data generation, processing and analytics
-Pandas| Data manipulation
-NumPy| Numerical operations
-Apache Kafka| Streaming ingestion
-Snowflake| Cloud data warehouse
-SQL| Data querying and transformation
-dbt| Data transformation and testing
-ML| Condition prediction and monitoring
-Apache Superset| Dashboard and visualization
-Git| Version control
-GitHub| Source-code management
-Docker| Containerized services
-
----
-
-🧰 Tools by Pipeline Stage
-
-DATA GENERATION
-      ↓
-    Python
-      ↓
-STREAMING
-      ↓
- Apache Kafka
-      ↓
-DATA STORAGE
-      ↓
-  Snowflake
-      ↓
-TRANSFORMATION
-      ↓
-     dbt
-      ↓
-ANALYTICS / ML
-      ↓
- Python / ML
-      ↓
-VISUALIZATION
-      ↓
-Apache Superset
-      ↓
-DECISION SUPPORT
-
----
-
-📁 Project Structure
-
-A recommended repository structure is:
-
+```text
 AtmoSync/
+│
+├── analytics/
+│   ├── arbitrage_engine.py
+│   ├── commodity_rules.py
+│   └── spoilage_risk.py
+│
+├── architecture/
+│   └── atmosync_pipeline_architecture.md
+│
+├── dashboard/
+│   ├── app.py
+│   ├── README.md
+│   └── requirements.txt
 │
 ├── data/
 │   ├── raw/
 │   ├── processed/
-│   └── warehouse/
+│   └── validated/
+│
+├── dbt/
+│   └── atmosync_dbt/
 │
 ├── kafka/
 │   ├── producer.py
-│   └── consumer.py
-│
-├── ml/
-│   ├── prediction.py
-│   └── monitoring.py
-│
-├── dbt/
-│   └── atmosync/
-│       ├── models/
-│       ├── tests/
-│       ├── macros/
-│       ├── dbt_project.yml
-│       └── profiles.yml
-│
-├── analytics/
-│   └── analysis.py
-│
-├── dashboard/
+│   ├── consumer.py
 │   └── ...
 │
-├── reports/
+├── pipeline/
+│   └── config/
 │
-├── requirements.txt
-├── README.md
-└── .gitignore
+├── scripts/
+│   ├── validate_telemetry.py
+│   ├── preprocess_telemetry.py
+│   ├── analyze_microclimate.py
+│   ├── advanced_analytics.py
+│   ├── train_condition_model.py
+│   └── create_prediction_monitoring.py
+│
+├── simulator/
+│   └── iot_simulator.py
+│
+├── warehouse/
+│   └── ...
+│
+├── Dockerfile
+├── .dockerignore
+└── README.md
+```
 
-«The exact folder structure may differ from the current repository; the structure above represents a clean organization for the complete pipeline.»
+</details>
 
 ---
 
-🚀 Pipeline Execution
+## ▶️ Running the Project
 
-1. Create Python Environment
+### 🖥️ Option A: Run locally
 
+**1. Clone the repository**
+
+```bash
+git clone https://github.com/PritwishSaha/AtmoSync.git
+cd AtmoSync
+```
+
+**2. Create a Python virtual environment** (Windows PowerShell)
+
+```powershell
 python -m venv .venv
-
-Activate on Windows PowerShell:
-
 .\.venv\Scripts\Activate.ps1
+```
+
+**3. Install dashboard dependencies**
+
+```powershell
+pip install -r dashboard\requirements.txt
+```
+
+**4. Launch the Streamlit dashboard**
+
+```powershell
+streamlit run dashboard\app.py
+```
+
+Then open 👉 **http://localhost:8501**
+
+### 🐳 Option B: Run with Docker
+
+**Build the image**
+
+```powershell
+docker build -t atmosync-dashboard .
+```
+
+**Run the container**
+
+```powershell
+docker run --name atmosync-dashboard -p 8501:8501 atmosync-dashboard
+```
+
+Then open 👉 **http://localhost:8501**
 
 ---
 
-2. Install Dependencies
+## 🔬 Verification Results
 
-pip install -r requirements.txt
+Every major pipeline component was verified in the final implementation.
 
-Example dependencies:
-
-pandas
-numpy
-kafka-python
-
-Additional packages may be required depending on the analytics, ML, database, and dashboard components being executed.
-
----
-
-⚡ Running Kafka
-
-AtmoSync uses Apache Kafka as the streaming layer.
-
-The Kafka setup uses KRaft mode, eliminating the need for a separate ZooKeeper service.
-
-Conceptually:
-
-Python Producer
-      ↓
-Kafka Broker
-      ↓
-Kafka Topic
-      ↓
-Python Consumer
-
-Telemetry messages can be published to Kafka and consumed downstream.
+| Component | Check | Result |
+|:-:|---|:-:|
+| 🚀 **Kafka** | Topic `telemetry` • 1,785 messages processed • 0 failed | ✅ |
+| ❄️ **Snowflake** | `ATMOSYNC_DB.TELEMETRY_SCHEMA.RAW_TELEMETRY` • 1,785 records | ✅ |
+| 🔧 **dbt** | 3 models • 8 tests • 1 source • PASS 11 / WARN 0 / ERROR 0 | ✅ |
+| 📈 **Streamlit** | Dashboard working | ✅ |
+| 🐳 **Docker** | Container working on port 8501 | ✅ |
+| 🌿 **Git** | Branch `main` • remote `origin/main` • working tree clean | ✅ |
 
 ---
 
-❄️ Snowflake Setup
+## 📌 Current Project Status
 
-Create the AtmoSync database and schema:
+<div align="center">
 
-CREATE DATABASE ATMOSYNC_DB;
+### ✅ Final Review Ready
 
-CREATE SCHEMA ATMOSYNC_DB.TELEMETRY_SCHEMA;
+</div>
 
-The raw telemetry table is then used for ingestion:
+The major components of AtmoSync have been developed, integrated, tested, documented, and pushed to GitHub.
 
-ATMOSYNC_DB
-    ↓
-TELEMETRY_SCHEMA
-    ↓
-RAW_TELEMETRY
+> [!IMPORTANT]
+> This is a **local, internship-scale analytical system** that uses **simulated IoT telemetry**. It should not be interpreted as a production deployment or as a system connected to physical IoT devices.
 
----
+### ⚠️ Project Limitations
 
-🔨 dbt Setup
-
-Install dbt with the Snowflake adapter:
-
-pip install dbt-core dbt-snowflake
-
-Check installation:
-
-dbt --version
-
-Move into the dbt project:
-
-cd dbt/atmosync
-
-Run the project:
-
-dbt build
-
-The build process performs:
-
-Models
-+
-Tests
-+
-Sources
-↓
-Build Result
+- 🧪 Telemetry data is simulated rather than collected from physical IoT devices.
+- 🖥️ Kafka runs as a local single-node KRaft environment.
+- 🎓 The system is intended for analytical and internship demonstration purposes, not production.
+- 🐳 The dashboard is containerized locally with Docker.
+- 🏭 Production-scale orchestration, monitoring, security, and high availability are outside the current scope.
 
 ---
 
-📊 Dashboard
+## 🔮 Future Enhancements
 
-Apache Superset provides the visualization layer.
-
-The dashboard can connect to the transformed Snowflake data and expose:
-
-Container Monitoring
-        +
-Sensor Trends
-        +
-Condition Distribution
-        +
-ML Predictions
-        +
-Prediction Confidence
-        +
-Arbitrage Actions
+| 📡 Data & Streaming | 🧠 Intelligence | 🏭 Production Readiness |
+|---|---|---|
+| Integration with real IoT sensors | Automated model retraining | Production-grade monitoring & observability |
+| Multi-node Kafka deployment | Advanced time-series forecasting | Role-based dashboard access |
+| Cloud-based streaming infrastructure | Route optimization | Real-time alert notifications |
+| Real-time telemetry ingestion | Cost-aware dynamic rerouting | Cloud deployment & orchestration |
 
 ---
 
-📌 Key Metrics
+## 🎓 Internship Project
 
-AtmoSync can monitor metrics such as:
+**Project:** AtmoSync: Micro-Climate Arbitrage Analytics
 
-Container Metrics
-
-- Total containers
-- Container-wise condition
-- Container-wise telemetry
-- Anomaly count
-
-Environmental Metrics
-
-- Average temperature
-- Maximum temperature
-- Minimum temperature
-- Average humidity
-- Average vibration
-
-Commodity Metrics
-
-- Commodity distribution
-- Commodity-wise anomalies
-- Commodity-wise environmental conditions
-
-ML Metrics
-
-- Predicted condition
-- Prediction confidence
-- Confidence category
-- Prediction status
-
-Operational Metrics
-
-- Continue monitoring
-- Increase monitoring
-- Consider rerouting
-- Urgent intervention
+**Focus areas:**
+`Data Engineering` &nbsp; `Data Analytics` &nbsp; `Machine Learning` &nbsp; `Streaming Data` &nbsp; `Cloud Data Warehousing` &nbsp; `Business Intelligence` &nbsp; `Decision Support`
 
 ---
 
-📈 Example Analytical Questions
+## 👨‍💻 Author
 
-AtmoSync can be used to answer questions such as:
+<div align="center">
 
-Container Analysis
+**Pritwish Saha**
+B.Tech CSE (AI & ML) • Brainware University
 
-«Which containers are currently showing abnormal conditions?»
+[![GitHub](https://img.shields.io/badge/GitHub-PritwishSaha-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/PritwishSaha)
 
-Temperature Analysis
-
-«Which containers experienced the highest temperature?»
-
-Commodity Analysis
-
-«Which commodities are associated with more warning/anomaly records?»
-
-Sensor Analysis
-
-«How does humidity vary across containers?»
-
-ML Analysis
-
-«Where are model predictions showing lower confidence?»
-
-Operational Analysis
-
-«How many records require increased monitoring?»
-
-Arbitrage Analysis
-
-«Which records should be evaluated for possible rerouting?»
+</div>
 
 ---
 
-🔍 Example End-to-End Scenario
+## ⭐ Project Summary
 
-Consider an avocado shipment:
+```mermaid
+flowchart LR
+    A["📡 IoT Telemetry<br/>+ Kafka + Snowflake<br/>+ dbt + Analytics + ML"] --> B["🌡️ Micro-Climate<br/>Risk Detection"]
+    B --> C["⚠️ Spoilage<br/>Analysis"]
+    C --> D["💰 Arbitrage<br/>Decision Support"]
+    D --> E["📈 Interactive<br/>Dashboard"]
 
-Commodity
-   ↓
-Avocado
+    style A fill:#0f2027,stroke:#00c2ff,color:#fff
+    style B fill:#1b3a4b,stroke:#00c2ff,color:#fff
+    style C fill:#5c4a00,stroke:#ffd54f,color:#fff
+    style D fill:#1b5e20,stroke:#69f0ae,color:#fff
+    style E fill:#7a1f2b,stroke:#ff4b4b,color:#fff
+```
 
-Container
-   ↓
-CONT_003
+<div align="center">
 
-Telemetry
-   ↓
-Temperature = 18.5°C
-Humidity    = 94%
-Vibration   = 0.32
+**AtmoSync transforms container-level environmental telemetry into analytical insights and actionable supply-chain decisions.**
 
-The pipeline processes the record:
+⭐ *If you find this project interesting, consider giving it a star!* ⭐
 
-IoT Telemetry
-      ↓
-Kafka
-      ↓
-Snowflake
-      ↓
-dbt
-      ↓
-Analytics
-      ↓
-ML Monitoring
-      ↓
-Risk / Condition Analysis
-      ↓
-Operational Action
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f2027,50:203a43,100:2c5364&height=120&section=footer" alt="footer" width="100%"/>
 
-The resulting monitoring layer may classify the shipment into an action such as:
-
-CONSIDER REROUTING
-
-The purpose is to provide an analyst or supply-chain operator with an additional signal for decision-making.
-
----
-
-🧩 Engineering Concepts Demonstrated
-
-This project demonstrates several practical data-engineering and analytics concepts.
-
-Data Engineering
-
-- Data ingestion
-- Streaming pipelines
-- Data validation
-- Data warehousing
-- ETL/ELT
-- Data transformation
-- Data quality testing
-
-Analytics
-
-- Exploratory data analysis
-- Descriptive statistics
-- Aggregation
-- Trend analysis
-- Condition analysis
-- Operational analytics
-
-Machine Learning
-
-- Prediction generation
-- Prediction confidence
-- Model monitoring
-- Prediction status
-- Operational interpretation
-
-Data Visualization
-
-- KPI dashboards
-- Time-series analysis
-- Distribution analysis
-- Operational monitoring
-
-DevOps / Engineering
-
-- Docker
-- Git
-- GitHub
-- Environment management
-- Reproducible development
-
----
-
-🔐 Data Quality Principles
-
-AtmoSync follows several data-quality principles:
-
-Accuracy
-   +
-Completeness
-   +
-Consistency
-   +
-Validity
-   +
-Traceability
-
-The telemetry dataset was checked for:
-
-Missing Values → 0
-Duplicates     → 0
-Invalid Sensor Data → 0
-
-This validation provides a cleaner foundation for downstream analytics.
-
----
-
-🔮 Future Improvements
-
-Potential extensions include:
-
-1. Real IoT Hardware
-
-Replace the simulator with real sensors.
-
-Temperature Sensor
-Humidity Sensor
-Vibration Sensor
-       ↓
-IoT Gateway
-       ↓
-Kafka
-
----
-
-2. Real-Time Streaming Dashboard
-
-Instead of periodic analysis:
-
-Sensor
-  ↓
-Kafka
-  ↓
-Snowflake
-  ↓
-Dashboard
-
-could support near-real-time monitoring.
-
----
-
-3. Commodity Price Integration
-
-Add external commodity pricing data:
-
-Container Telemetry
-        +
-Commodity Market Price
-        ↓
-Economic Impact
-        ↓
-Arbitrage Analysis
-
-This would make the "arbitrage" component more explicitly economic rather than primarily operational.
-
----
-
-4. Advanced Spoilage Prediction
-
-Future versions could estimate:
-
-Spoilage Probability
-       +
-Expected Loss
-       +
-Rerouting Cost
-       ↓
-Economic Decision Support
-
----
-
-5. Automated Alerts
-
-The system could generate alerts when:
-
-Temperature > Threshold
-        OR
-Humidity > Threshold
-        OR
-Vibration > Threshold
-        OR
-Prediction Confidence < Threshold
-
-Example:
-
-⚠️ Container CONT_004
-
-Condition: ANOMALY
-Temperature: 19.2°C
-Humidity: 
+</div>
