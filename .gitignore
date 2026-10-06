@@ -1,18 +1,82 @@
+# ==============================
 # Python
+# ==============================
 .venv/
-__pycache__/
-*.pyc
+venv/
+env/
+ENV/
 
-# Environment / secrets
+__pycache__/
+*.py[cod]
+*.pyo
+
+# ==============================
+# Environment / Secrets
+# ==============================
 .env
 .env.*
 !.env.example
 
-# dbt
-dbt/atmosync_dbt/target/
-dbt/atmosync_dbt/logs/
-
 # Snowflake credentials
 profiles.yml
-# Jupyter checkpoints
+**/profiles.yml
+
+# ==============================
+# dbt
+# ==============================
+dbt/**/target/
+dbt/**/logs/
+
+# ==============================
+# Jupyter
+# ==============================
 .ipynb_checkpoints/
+
+# ==============================
+# AI / Coding Tool Worktrees
+# ==============================
+.kilo/
+
+# ==============================
+# Logs
+# ==============================
+*.log
+logs/
+
+# ==============================
+# IDE
+# ==============================
+.vscode/
+.idea/
+
+# ==============================
+# OS / OneDrive
+# ==============================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ==============================
+# Temporary Files
+# ==============================
+*.tmp
+*.temp
+*.bak
+
+# ==============================
+# Python Build Files
+# ==============================
+build/
+dist/
+*.egg-info/
+
+# ==============================
+# Test / Tool Cache
+# ==============================
+.pytest_cache/
+.mypy_cache/
+
+# ==============================
+# Streamlit Secrets
+# ==============================
+.streamlit/secrets.toml
