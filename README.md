@@ -79,7 +79,7 @@ The verified AtmoSync pipeline follows:
 
 **IoT Simulator → Telemetry Validation → Apache Kafka → Kafka Consumer → Snowflake → dbt → Analytics & ML Monitoring → Streamlit Dashboard → Business Decision Support**
 
-![AtmoSync System Architecture](docs/images/atmosync-architecture.png)
+![AtmoSync System Architecture](images/atmosync-architecture.png)
 
 ### 🔄 Architecture Flow
 
@@ -408,7 +408,7 @@ The system converts analytical risk into four business-oriented actions:
 
 The AtmoSync dashboard is implemented using **Streamlit**.
 
-![AtmoSync Monitoring Dashboard](docs/images/atmosync-dashboard.png)
+![AtmoSync Monitoring Dashboard](images/atmosync-dashboard.png)
 
 The dashboard provides:
 
@@ -434,7 +434,7 @@ The dashboard provides:
 
 ### 💰 Spoilage Arbitrage Analysis
 
-![Spoilage Arbitrage Analysis](docs/images/spoilage-arbitrage-analysis.png)
+![Spoilage Arbitrage Analysis](images/spoilage-arbitrage-analysis.png)
 
 The decision engine categorizes telemetry into four business actions:
 
@@ -623,7 +623,7 @@ The major implemented components were tested and verified during the final proje
 
 #### dbt Build Verification
 
-![dbt Build Success](docs/images/dbt-build-success.png)
+![dbt Build Success](images/dbt-build-success.png)
 
 The final dbt build produced:
 
@@ -639,7 +639,7 @@ TOTAL=11
 
 #### Kafka → Snowflake Verification
 
-![Kafka Snowflake Verification](docs/images/kafka-snowflake-verification.png)
+![Kafka Snowflake Verification](images/kafka-snowflake-verification.png)
 
 The final Kafka consumer verification produced:
 
