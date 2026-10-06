@@ -7,16 +7,10 @@ __pycache__
 *.pyc
 *.pyo
 *.pyd
+
 notebooks
 docs
 architecture
 dbt
 kafka
-models
-scripts
-simulator
-pipeline
 warehouse
-analytics
-data/raw
-data/validated
