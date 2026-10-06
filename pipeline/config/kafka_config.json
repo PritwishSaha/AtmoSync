@@ -1,6 +1,6 @@
 {
   "bootstrap_servers": "localhost:9092",
-  "topic": "atmosync.telemetry",
+  "topic": "telemetry",
   "consumer_group": "atmosync-analytics",
   "producer": {
     "acks": "all",

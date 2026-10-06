@@ -1,4 +1,4 @@
-# AtmoSync Pipeline Architecture
+﻿# AtmoSync Pipeline Architecture
 
 ## 1. Overview
 
@@ -13,21 +13,21 @@ The proposed production-oriented architecture follows:
 
 ```text
 IoT Simulator
-      ↓
+      â†“
 Apache Kafka
-      ↓
+      â†“
 Data Ingestion
-      ↓
+      â†“
 Raw Storage
-      ↓
+      â†“
 Snowflake
-      ↓
+      â†“
 dbt
-      ↓
+      â†“
 Analytics / ML
-      ↓
+      â†“
 Dashboard
-      ↓
+      â†“
 Business Decision Support
 ```
 
@@ -35,7 +35,7 @@ Business Decision Support
 
 ## 2. Architecture Layers
 
-### Layer 1 — Data Generation
+### Layer 1 â€” Data Generation
 
 The Python IoT simulator generates telemetry records representing
 sensor readings from shipping containers.
@@ -56,13 +56,13 @@ Current implementation:
 
 ---
 
-### Layer 2 — Streaming Ingestion
+### Layer 2 â€” Streaming Ingestion
 
-Apache Kafka is planned as the streaming layer.
+Apache Kafka is implemented as the streaming ingestion component.
 
-Kafka will receive telemetry events from the IoT producer.
+Kafka receives telemetry events from the IoT producer through the verified Kafka producer.
 
-Proposed topic:
+Verified topic:
 
 `atmosync.telemetry`
 
@@ -75,7 +75,7 @@ Purpose:
 
 ---
 
-### Layer 3 — Data Ingestion
+### Layer 3 â€” Data Ingestion
 
 A Kafka consumer will read telemetry events from the Kafka topic.
 
@@ -89,7 +89,7 @@ Responsibilities:
 
 ---
 
-### Layer 4 — Raw Data Storage
+### Layer 4 â€” Raw Data Storage
 
 Raw telemetry should be preserved before analytical transformations.
 
@@ -106,9 +106,9 @@ Current local representation:
 
 ---
 
-### Layer 5 — Data Warehouse
+### Layer 5 â€” Data Warehouse
 
-Snowflake is the planned analytical data warehouse.
+Snowflake is implemented and verified as the analytical data warehouse.
 
 The warehouse will contain structured telemetry and analytical tables.
 
@@ -120,9 +120,9 @@ Potential layers:
 
 ---
 
-### Layer 6 — dbt Transformation
+### Layer 6 â€” dbt Transformation
 
-dbt will be used for SQL-based transformation and data modeling.
+dbt is implemented and verified for SQL-based transformation and data modeling.
 
 Expected responsibilities:
 
@@ -135,7 +135,7 @@ Expected responsibilities:
 
 ---
 
-### Layer 7 — Analytics and ML
+### Layer 7 â€” Analytics and ML
 
 The analytics layer calculates:
 
@@ -156,7 +156,7 @@ Existing local analytics:
 
 ---
 
-### Layer 8 — Dashboard
+### Layer 8 â€” Dashboard
 
 The dashboard presents operational analytics.
 
@@ -172,7 +172,7 @@ Future architecture may use Apache Superset as the BI layer.
 
 ---
 
-### Layer 9 — Business Decision Support
+### Layer 9 â€” Business Decision Support
 
 The final layer converts analytics into operational recommendations.
 
@@ -243,7 +243,7 @@ CSV files and Python/Pandas.
 
 ### Future Streaming Processing
 
-The proposed architecture introduces Apache Kafka to support continuous
+The current implementation uses Apache Kafka for event-based ingestion. The production-oriented architecture can be extended to support continuous
 telemetry ingestion.
 
 ### Raw Data Preservation
@@ -387,10 +387,10 @@ Different pipeline components should use appropriate permissions.
 
 For example:
 
-- ingestion service → write access to raw tables
-- transformation service → transformation permissions
-- analytics service → read access to analytical tables
-- dashboard → read-only access where possible
+- ingestion service â†’ write access to raw tables
+- transformation service â†’ transformation permissions
+- analytics service â†’ read access to analytical tables
+- dashboard â†’ read-only access where possible
 
 ### Network Security
 
@@ -418,15 +418,15 @@ Example:
 
 ```text
 Development
-    ↓
+    â†“
 Development Kafka
-    ↓
+    â†“
 Development Warehouse
 
 Production
-    ↓
+    â†“
 Production Kafka
-    ↓
+    â†“
 Production Warehouse
 ```
 
@@ -525,71 +525,59 @@ Pipeline Health
 
 ## 8. Current vs Planned Architecture
 
-The current AtmoSync project already contains several implemented
-analytical components.
+The current AtmoSync implementation contains both a verified
+data-engineering pipeline and local analytical components.
 
-Other components are currently architectural targets.
+The following components have been implemented and verified:
 
-| Component | Current Status | Planned |
+| Component | Current Status | Notes |
 |---|---|---|
-| IoT Simulator | Implemented | Continue |
-| CSV Raw Storage | Implemented | Retain |
-| Data Validation | Implemented | Continue |
-| Feature Engineering | Implemented | dbt equivalent |
-| ML Prediction | Implemented | Continue |
-| Prediction Monitoring | Implemented | Continue |
-| Risk Analytics | Implemented | Continue |
-| Advanced Analytics | Implemented | Continue |
-| Spoilage Arbitrage | Implemented | Continue |
-| Streamlit Dashboard | Implemented | Continue |
-| Apache Kafka | Architecture stage | Implement |
-| Snowflake | Architecture stage | Implement |
-| dbt | Architecture stage | Implement |
-| Apache Superset | Architecture stage | Evaluate / implement |
+| IoT Simulator | Implemented | Generates simulated telemetry |
+| CSV Validation | Implemented | Validates telemetry before ingestion |
+| Feature Engineering | Implemented | Python-based analytical preprocessing |
+| Apache Kafka | Implemented and verified | Topic: `telemetry` |
+| Kafka Producer | Implemented and verified | Sends 1,785 validated telemetry records |
+| Kafka Consumer | Implemented and verified | Reads Kafka events and loads Snowflake |
+| Snowflake | Implemented and verified | `ATMOSYNC_DB.TELEMETRY_SCHEMA.RAW_TELEMETRY` |
+| dbt | Implemented and verified | Staging, analytics models, and data-quality tests |
+| Risk Analytics | Implemented | Environmental and spoilage-risk analysis |
+| ML Prediction | Implemented | Condition prediction and monitoring |
+| Spoilage Arbitrage | Implemented | Business decision-support logic |
+| Streamlit Dashboard | Implemented | Operational analytics dashboard |
+| Apache Superset | Not implemented | Future BI alternative |
 
-### Current Local Pipeline
+### Verified Data Engineering Pipeline
 
-The current implemented flow is:
-
-```text
-IoT Simulator
-      ↓
-CSV
-      ↓
-Validation
-      ↓
-Feature Engineering
-      ↓
-ML / Risk Analytics
-      ↓
-Streamlit Dashboard
-```
-
-### Planned Data Engineering Pipeline
-
-The future architecture is:
+The verified data-engineering flow is:
 
 ```text
 IoT Simulator
-      ↓
-Kafka
-      ↓
-Raw Storage
-      ↓
-Snowflake
-      ↓
-dbt
-      ↓
-Analytics / ML
-      ↓
-Dashboard
-      ↓
-Spoilage Arbitrage
-```
-
-The distinction between implemented and planned components is
-important because the current project does not yet represent a
-fully deployed Kafka/Snowflake/dbt/Superset production pipeline.
+      |
+      v
+Validated Telemetry
+      |
+      v
+Kafka Producer
+      |
+      v
+Kafka Topic: telemetry
+      |
+      v
+Kafka Consumer
+      |
+      v
+Snowflake RAW_TELEMETRY
+      |
+      v
+dbt STAGING
+      |
+      v
+dbt ANALYTICS
+      |
+      +-----------------------+
+      |                       |
+      v                       v
+arbitrage_analysis     telemetry_summary
 
 ---
 
@@ -612,20 +600,19 @@ It is not yet a continuously running streaming pipeline.
 
 ### Kafka
 
-Kafka is currently part of the proposed architecture.
+Kafka has been implemented and verified as the streaming ingestion component.
 
-A production Kafka cluster and verified producer/consumer workflow have
-not yet been implemented.
+The verified workflow uses the 	elemetry topic and a single-node local KRaft broker.
 
 ### Snowflake
 
-Snowflake is currently a planned warehouse component.
+Snowflake has been implemented and verified as the warehouse layer.
 
-The current analytical datasets are stored locally.
+The verified raw telemetry table is ATMOSYNC_DB.TELEMETRY_SCHEMA.RAW_TELEMETRY and contains 1,785 records.
 
 ### dbt
 
-dbt is part of the planned transformation architecture.
+dbt has been implemented and successfully verified against Snowflake.
 
 The current transformations are implemented primarily through Python
 and Pandas.
